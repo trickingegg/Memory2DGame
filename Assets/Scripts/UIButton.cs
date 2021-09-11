@@ -39,14 +39,4 @@ public class UIButton : MonoBehaviour
             targetObject.SendMessage(targetMessage);
         }
     }
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 }

@@ -20,7 +20,6 @@ public class MemoryCard : MonoBehaviour
     }
 
     [SerializeField] private SceneController controller;
-
     private int _id;
     public int id
     {
@@ -32,14 +31,4 @@ public class MemoryCard : MonoBehaviour
         _id = id;
         GetComponent<SpriteRenderer>().sprite = image;
     }    
-        void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 }

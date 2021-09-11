@@ -84,6 +84,7 @@ public class SceneController : MonoBehaviour
             }
         }
     }
+
     private int[] ShuffleArray(int[] numbers)   //Knuth shuffle algorithm
     {
         int[] newArray = numbers.Clone() as int[];
@@ -101,11 +102,4 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Memory");
     }
-
-    void Update()
-    {
-        
-    }
-
-
 }
