@@ -1,34 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class MemoryCard : MonoBehaviour
 {
-    [SerializeField] private GameObject cardBack;
+    public event Action<MemoryCard> Revealed;
+
+    [SerializeField] private GameObject Back;
+
+    private GameplayController _gameplayController;
+    private SpriteRenderer _renderer;
+
+    public CardType Id { get; private set; }
+
+    private void Awake() => _renderer = GetComponent<SpriteRenderer>();
+
+    public void Initialize(CardType id, GameplayController gameplayController)
+    {
+        Id = id;
+        _gameplayController = gameplayController;
+    }
+
+    public void SetImage(Sprite image) => _renderer.sprite = image;
+
     public void OnMouseDown()
     {
-        if (cardBack.activeSelf && controller.canReveal) //deactivate only if card back is visible and can be opened only 2 cards
-        {
-            cardBack.SetActive(false); //make card back invisible
-            controller.CardRevealed(this);  //notify the controller about the opening of this card
-        }
+        if (!Back.activeSelf)
+            return;
+        if (!_gameplayController.CanReveal)
+            return;
+
+        Back.SetActive(false);
+        Reveal(true);
     }
 
-    public void Unreveal()
+    public void Reveal(bool isRevealed)
     {
-        cardBack.SetActive(true);
+        Back.SetActive(!isRevealed);
+        if (isRevealed)
+            Revealed?.Invoke(this);
     }
-
-    [SerializeField] private SceneController controller;
-    private int _id;
-    public int id
-    {
-        get { return _id; }
-    }
-
-    public void SetCard(int id, Sprite image)
-    {
-        _id = id;
-        GetComponent<SpriteRenderer>().sprite = image;
-    }    
 }

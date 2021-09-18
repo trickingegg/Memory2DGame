@@ -1,29 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class UIButton : MonoBehaviour
 {
     [SerializeField] private GameObject targetObject;
     [SerializeField] private string targetMessage;
+    private SpriteRenderer _renderer;
     public Color highlightColor = Color.cyan;
 
-    public void OnMouseEnter()
-    {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        if (sprite != null)
-        {
-            sprite.color = highlightColor;  //change button color on mouse hover
-        }
-    }
+    private void Awake() => _renderer = GetComponent<SpriteRenderer>();
+
+    public void OnMouseEnter() => _renderer.color = highlightColor;
 
     public void OnMouseExit()
     {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        if (sprite != null)
-        {
-            sprite.color = Color.white;
-        }
+        var sprite = GetComponent<SpriteRenderer>();
+        if (sprite != null) sprite.color = Color.white;
     }
 
     public void OnMouseDown()
@@ -35,8 +27,6 @@ public class UIButton : MonoBehaviour
     {
         transform.localScale = Vector3.one;
         if (targetObject != null)
-        {
             targetObject.SendMessage(targetMessage);
-        }
     }
 }
