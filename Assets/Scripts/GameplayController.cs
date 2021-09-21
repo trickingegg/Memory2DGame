@@ -18,9 +18,9 @@ public enum CardType
 
 public class GameplayController : MonoBehaviour
 {
-    private const int GridRows = 2; // quantity of rows 
-    private const int GridCols = 4; // and columns 
-    private const float OffsetX = 2f; // regulate distance
+    private const int GridRows = 2; 
+    private const int GridCols = 4; 
+    private const float OffsetX = 2f;
     private const float OffsetY = 2.5f;
 
     [SerializeField] private GameObject _cardPrefab;
